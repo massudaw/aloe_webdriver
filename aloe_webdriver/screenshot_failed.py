@@ -82,8 +82,12 @@ def take_screenshot(self):
     if self.outline is None:
         outline_index_str = ''
     else:
-        outline_index = self.scenario.outlines.index(self.outline) + 1
-        outline_index_str = '_{}'.format(outline_index)
+        try:
+            outline_index = self.scenario.outlines.index(self.outline) + 1
+            outline_index_str = '_{}'.format(outline_index)
+        except ValueError:
+            outline_index_str = ''
+
 
     base_name = FORMAT.format(
         feature_file=os.path.relpath(self.feature.filename),
